@@ -66,6 +66,9 @@ func (c *connection) read() (string, error) {
 	if strings.HasPrefix(str, "ERR ") {
 		return "", errors.New(str[4:])
 	}
+	if strings.HasPrefix(str, "ENDED ") {
+		return "", errors.New(str[6:])
+	}
 	if strings.HasPrefix(str, "STARTED ") {
 
 		ss := strings.FieldsFunc(str, func(r rune) bool {
