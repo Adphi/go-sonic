@@ -30,6 +30,7 @@ func newConnection(d *driver) (*connection, error) {
 	c.closed = false
 	c.conn = conn
 	c.reader = bufio.NewReader(c.conn)
+	c.cmdMaxBytes = 1024
 
 	err = c.write(fmt.Sprintf("START %s %s", d.channel, d.Password))
 	if err != nil {
